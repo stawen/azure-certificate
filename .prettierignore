@@ -1,0 +1,4 @@
+.pulumi
+.npm
+bin
+dist/

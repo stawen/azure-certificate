@@ -1,0 +1,19 @@
+config:
+    azure-native:environment: public
+    azure-native:location: FranceCentral
+    azure-native:subscriptionId: xxxx
+    azure-native:tenantId: xxxx
+
+    # A retirer ?
+    azure:tenantId: xxx
+    azuread:tenantId: xxx
+
+    user:name: name@domaine.tld
+
+    asc:certificates:
+        - fqdn: '*.foo.test.maif.io'
+          autoRenew: false
+          suffix: 20220105-6
+        # - fqdn: '*.foo3.test.maif.io'
+        #   autoRenew: true
+        #   suffix: 20220105-4
