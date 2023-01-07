@@ -27,7 +27,7 @@ yarn add @stawen/azure-certificate
 npm install @stawen/azure-certificate
 ```
 
-### pulumi.stack.yml
+### pulumi.[stack].yml
 
 In this file, you must specify
 
@@ -183,3 +183,10 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 -   Ajouter dans le package.json le git add . + Commit du nouveau tag
 -   Mettre une githup action quand on pouse un release pour publish vers npm
+
+"version-changelog": "version-changelog CHANGELOG.md --remote=github && changelog-verify CHANGELOG.md && git add CHANGELOG.md && git commit -m \"Changelog update\""
+
+changer la version de package.json et changlog.
+les ajouter dans un commit
+Creer un nouveau tag avec la nouvelle version
+faire le push vers le repo
