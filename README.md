@@ -179,6 +179,7 @@ See [CHANGELOG.md](./CHANGELOG.md)
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-TODO :
+# TODO :
 
-ajouter dans le package.json le git add . + Commit du nouveau tag
+-   Ajouter dans le package.json le git add . + Commit du nouveau tag
+-   Mettre une githup action quand on pouse un release pour publish vers npm
