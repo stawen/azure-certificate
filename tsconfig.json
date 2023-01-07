@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "./dist",
+        "outDir": "./lib",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -13,6 +13,6 @@
         "forceConsistentCasingInFileNames": true
     },
     "include": ["src/**/*"],
-    "files": ["index.ts"],
-    "exclude": ["node_modules", "dist"]
+    "files": ["src/index.ts"],
+    "exclude": ["node_modules", "lib"]
 }
