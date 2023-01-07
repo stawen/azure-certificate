@@ -1,8 +1,8 @@
 name: Publish Package to npmjs
 on:
-    push
-    # tags:
-    #     - '*'
+    push:
+        tags:
+            - '*'
 jobs:
     publish:
         runs-on: ubuntu-latest
@@ -13,7 +13,6 @@ jobs:
               with:
                   node-version: '16.x'
                   registry-url: 'https://registry.npmjs.org'
-                  #   always-auth: true
             - run: npm ci
             - run: npm publish --access public
               env:
