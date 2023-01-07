@@ -24,7 +24,7 @@
     "types": "lib/index.d.ts",
     "scripts": {
         "postinstall": "npx enforce-node-version",
-        "build": "rm -rf ./lib && tsc",
+        "build": "rm -rf ./lib && tsc -p tsconfig-build.json",
         "format": "prettier --write .",
         "format-check": "prettier --check .",
         "lint": "eslint . --ext .ts",

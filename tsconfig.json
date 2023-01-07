@@ -10,9 +10,10 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true,
+        "resolveJsonModule": true
     },
-    "include": ["src/**/*"],
-    "files": ["src/index.ts"],
-    "exclude": ["node_modules", "lib"]
+    "include": ["src/**/*", "index.ts"],
+    "files": ["index.ts"]
 }
