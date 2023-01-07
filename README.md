@@ -178,15 +178,3 @@ See [CHANGELOG.md](./CHANGELOG.md)
 ## Contribute
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
-
-# TODO :
-
--   Ajouter dans le package.json le git add . + Commit du nouveau tag
--   Mettre une githup action quand on pouse un release pour publish vers npm
-
-"version-changelog": "version-changelog CHANGELOG.md --remote=github && changelog-verify CHANGELOG.md && git add CHANGELOG.md && git commit -m \"Changelog update\""
-
-changer la version de package.json et changlog.
-les ajouter dans un commit
-Creer un nouveau tag avec la nouvelle version
-faire le push vers le repo && git push --tags
