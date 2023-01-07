@@ -19,11 +19,9 @@
         "prettier": "^2.2.1"
     },
     "dependencies": {
-        "@azure/arm-appservice": "^13.0.3",
-        "@azure/identity": "^3.1.2",
         "@pulumi/azure-native": "^1.89.1",
         "@pulumi/azuread": "^5.32.0",
         "@pulumi/pulumi": "^3.50.0",
-        "@pulumi/random": "^4.2.0"
+        "@stawen/azure-certificate": "^0.1.8"
     }
 }

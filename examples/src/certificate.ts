@@ -1,6 +1,8 @@
-import { rg, kv } from './kv'
 import * as pulumi from '@pulumi/pulumi'
-import { CertificateOrder } from '../../src/ascCertificate'
+// import { CertificateOrder } from '../../src/ascCertificate'
+import * as asc from '@stawen/azure-certificate'
+
+import { kv, rg } from './kv'
 
 // With config in pulumi.<stack>.yaml
 interface CertInputs {
@@ -12,7 +14,7 @@ interface CertInputs {
 const parameters: CertInputs[] = new pulumi.Config('asc').requireObject<CertInputs[]>('certificates')
 
 for (const param of parameters) {
-    new CertificateOrder({
+    new asc.CertificateOrder({
         fqdn: param.fqdn,
         autoRenew: param.autoRenew,
         suffix: param.suffix,

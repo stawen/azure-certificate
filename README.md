@@ -1,4 +1,4 @@
-# Azure ASC Dynamic Provider For Pulumi (TS)
+# Azure ASC Pulumi Dynamic Provider (TS)
 
 The goal of this library is to provide a simple way to provision and maintain ✨App Service Certificat✨, using Typescript/Javascript, with Pulumi.
 
