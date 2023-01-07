@@ -4,7 +4,6 @@ config:
     azure-native:subscriptionId: xxxx
     azure-native:tenantId: xxxx
 
-    # A retirer ?
     azure:tenantId: xxx
     azuread:tenantId: xxx
 
