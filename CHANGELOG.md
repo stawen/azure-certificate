@@ -4,6 +4,8 @@ This changelog uses [keepachangelog](http://keepachangelog.com) format.
 
 ## [Unreleased][]
 
+- npm login test
+
 ## [0.1.5][] - 2023-01-07
 
 - fix lint recommandation
