@@ -7,4 +7,5 @@
 *.zip
 *.log
 .npmrc
-
+examples/package-lock.json
+examples/Pulumi.dev.yaml
