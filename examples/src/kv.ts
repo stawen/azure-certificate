@@ -53,7 +53,7 @@ export const kv = new keyvault.Vault(
                     tenantId: tenantId,
                 },
                 {
-                    objectId: userObjectId, // Your User Object ID
+                    objectId: userObjectId.then((o) => o.id), // Your User Object ID
                     permissions: {
                         certificates: [keyvaultEnums.CertificatePermissions.All],
                         keys: [keyvaultEnums.KeyPermissions.All],

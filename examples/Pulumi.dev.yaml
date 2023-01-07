@@ -8,12 +8,12 @@ config:
     azure:tenantId: xxx
     azuread:tenantId: xxx
 
-    user:name: name@domaine.tld
+    user:name: name@domain.tld
 
     asc:certificates:
-        - fqdn: '*.foo.test.maif.io'
+        - fqdn: '*.foo.domain.tld'
           autoRenew: false
-          suffix: 20220105-6
-        # - fqdn: '*.foo3.test.maif.io'
-        #   autoRenew: true
-        #   suffix: 20220105-4
+          suffix: 20220108
+        - fqdn: '*.bar.domain.tld'
+          autoRenew: true
+          suffix: 20220108

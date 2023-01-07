@@ -1,6 +1,6 @@
 import { rg, kv } from './kv'
 import * as pulumi from '@pulumi/pulumi'
-import { AscCertificateOrder, CertificateOrder } from '../..src/provider'
+import { CertificateOrder } from '../../src/ascCertificate'
 
 // With config in pulumi.<stack>.yaml
 interface CertInputs {
