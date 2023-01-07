@@ -189,4 +189,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md)
 changer la version de package.json et changlog.
 les ajouter dans un commit
 Creer un nouveau tag avec la nouvelle version
-faire le push vers le repo
+faire le push vers le repo && git push --tags
