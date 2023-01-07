@@ -38,7 +38,7 @@
         "version-changelog-major": "npm version major --no-git-tag-version && npm run version-git-add && npm run version-changelog",
         "version-changelog": "version-changelog CHANGELOG.md --remote=github && changelog-verify CHANGELOG.md",
         "version-git-add": "git add package.json && git add package-lock.json && git add CHANGELOG.md",
-        "version-git-tag-push-release": "RELEASE_VERSION=$(echo npm run version --silent) && git commit -m \"Release $RELEASE_VERSION\" && git tag $RELEASE_VERSION HEAD"
+        "version-git-tag-push-release": "RELEASE_VERSION=$(npm run version --silent) && echo $RELEASE_VERSION"
     },
     "devDependencies": {
         "@types/node": "^18.11.9",
