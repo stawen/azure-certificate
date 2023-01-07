@@ -2,9 +2,9 @@
  * @author Stanislas Draunet (https://github.com/stawen)
  * @copyright MAIF / Cloud Platform Public - Azure
  */
-import * as pulumi from '@pulumi/pulumi'
-import { DefaultAzureCredential } from '@azure/identity'
 import { WebSiteManagementClient } from '@azure/arm-appservice'
+import { DefaultAzureCredential } from '@azure/identity'
+import * as pulumi from '@pulumi/pulumi'
 
 /**
  * Certificate product Type :
@@ -357,7 +357,7 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
         )
 
         // Create Link to Kv
-        const result = await client.appServiceCertificateOrders.beginCreateOrUpdateCertificate(
+        await client.appServiceCertificateOrders.beginCreateOrUpdateCertificate(
             inputs.resourceGroupName,
             params.certificateOrderName,
             this.linkToKvName,
@@ -511,8 +511,6 @@ export class AscCertificateOrder extends pulumi.dynamic.Resource {
     }
 }
 
-export interface CertificateOrderInputs extends AscCertificateOrderRessourceInputs {}
-
 /**
  * Component CertificateOrder
  *
@@ -551,7 +549,7 @@ export class CertificateOrder extends pulumi.ComponentResource {
     public readonly certificateURI: pulumi.Output<string>
     public readonly domainVerificationToken: pulumi.Output<string>
 
-    constructor(args: CertificateOrderInputs, opts?: pulumi.CustomResourceOptions) {
+    constructor(args: AscCertificateOrderRessourceInputs, opts?: pulumi.CustomResourceOptions) {
         const commonName = AscCertificateOrderProvider.normalizeFqdn(`${args.fqdn}`, `${args.suffix}`)
         //<package>:<module>:<type>
         super('stawen:azure-certificate:asc', `cert-${commonName}`, {}, opts)
