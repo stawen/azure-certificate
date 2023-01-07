@@ -32,12 +32,13 @@
         "prepare": "npm run build",
         "dep-check": "depcheck --ignores=@types/node",
         "prepublishOnly": "npm run format && npm run lint",
-        "version-changelog-patch": "npm version patch --no-git-tag-version && npm run version-changelog && npm run version-git-add && npm run version-git-tag-push-release",
-        "version-changelog-minor": "npm version minor --no-git-tag-version && npm run version-git-add && npm run version-changelog",
-        "version-changelog-major": "npm version major --no-git-tag-version && npm run version-git-add && npm run version-changelog",
+        "version-changelog-patch": "npm version patch --no-git-tag-version && npm run version-make-release",
+        "version-changelog-minor": "npm version minor --no-git-tag-version && npm run version-make-release",
+        "version-changelog-major": "npm version major --no-git-tag-version && npm run version-make-release",
+        "version-make-release": "npm run version-changelog && npm run version-git-add && npm run version-git-tag-push-release",
         "version-changelog": "version-changelog CHANGELOG.md --remote=github && changelog-verify CHANGELOG.md",
         "version-git-add": "git add package.json && git add package-lock.json && git add CHANGELOG.md",
-        "version-git-tag-push-release": "git commit -m \"Publish release $npm_package_version\" && git tag $npm_package_version HEAD && git push && git push --tags"
+        "version-git-tag-push-release": "git commit -m \"Publish new release $npm_package_version\" && git tag $npm_package_version HEAD && git push && git push --tags"
     },
     "devDependencies": {
         "@types/node": "^18.11.9",
