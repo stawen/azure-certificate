@@ -1,5 +1,7 @@
 /bin/
 /dist/
+/lib/
+.pulumi
 /node_modules/
 .DS_Store
 *.zip

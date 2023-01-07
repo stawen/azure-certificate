@@ -1,4 +1,6 @@
 .pulumi
 .npm
 bin
-dist/
+dist
+lib
+CHANGELOG.md
