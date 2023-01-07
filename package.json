@@ -1,6 +1,6 @@
 {
     "name": "@stawen/azure-certificate",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Pulumi dynamic provider for Azure App Service Certificate",
     "author": "Stanislas DRAUNET",
     "license": "MIT",
