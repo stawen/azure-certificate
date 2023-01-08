@@ -83,7 +83,7 @@ Updating (dev)
 
      Type                                  Name                                       Status            Info
      pulumi:pulumi:Stack                   app-services-cert-dev
- +   └─ azure-maif:certificate:asc         cert-wildcard-foo-bar-domain-tld-20230106  created (1s)
+ +   └─ stawen:azure-certificate:asc       cert-wildcard-foo-bar-domain-tld-20230106  created (1s)
  +      └─ pulumi-nodejs:dynamic:Resource  asc-wildcard-foo-bar-domain-tld-20230106   created (20s)
 
 Outputs:
