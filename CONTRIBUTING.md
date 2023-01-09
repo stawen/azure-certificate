@@ -1,5 +1,23 @@
 # Contribuer
 
+## Installation
+
+After clone this repo
+
+Use right node version
+
+```bash
+nvm use
+```
+
+If you don't have right node version or, nvm, look [this doc for mac](https://tecadmin.net/install-nvm-macos-with-homebrew/)
+
+Install package
+
+```bash
+npm install
+```
+
 ## Versionning
 
 To release a new version:

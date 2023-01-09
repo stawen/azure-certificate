@@ -59,6 +59,6 @@
         "@pulumi/pulumi": "^3.50.0"
     },
     "engines": {
-        "node": ">=14"
+        "node": ">=16"
     }
 }
