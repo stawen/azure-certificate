@@ -28,7 +28,6 @@
         "format": "prettier --write .",
         "format-check": "prettier --check .",
         "lint": "eslint . --ext .ts",
-        "lint-before-publish": "eslint . --ext .ts --ignore-path .eslintignore-publish",
         "audit-check": "npm audit --registry=https://registry.npmjs.org --audit-level=high",
         "prepare": "npm run build",
         "prepublishOnly": "npm run format && npm run lint",
