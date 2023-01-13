@@ -16,7 +16,6 @@
         "@pulumi/azure-native": "^1.89.1",
         "@pulumi/azuread": "^5.32.0",
         "@pulumi/pulumi": "^3.50.0",
-        "@stawen/azure-certificate": "^0.1.8",
         "@pulumi/random": "^4.2.0"
     }
 }

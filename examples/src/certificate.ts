@@ -1,8 +1,8 @@
 import * as pulumi from '@pulumi/pulumi'
-import * as azc from '@stawen/azure-certificate'
 
+// import * as azc from '@stawen/azure-certificate'
 // For local dev, uncomment this line, and comment previous line
-// import * as azc from '../../index'
+import * as azc from '../../index'
 import { kv, rg } from './kv'
 
 // With config in pulumi.<stack>.yaml
