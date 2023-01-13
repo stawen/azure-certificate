@@ -72,7 +72,7 @@ export interface AscCertificateOrderOutputs extends AscCertificateOrderInputs, A
  *
  * @param subscriptionId - Sub Id where is the Kv and where you storge your App Service Certificate
  */
-class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
+export class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
     private linkToKvName: string = `link-to-kv`
     private location: string = 'Global'
     private subscriptionId: string
@@ -134,8 +134,7 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
         // Replace all '.' by '-'
         response = AscCertificateOrderProvider.replaceAll(response, '.', '-')
 
-        if (suffix && suffix != 'undefined') {
-            // this condition test when suffix is converted into a string by is undefined. if that, the suffix is set with value 'undefined'
+        if (suffix != 'undefined') {
             response = response.concat(`-${suffix}`)
         }
         return response
@@ -197,13 +196,9 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
      * @returns AscCertificateOrderOutputs Interface
      */
     async read(id: string, props: AscCertificateOrderInputs): Promise<pulumi.dynamic.ReadResult> {
-        // pulumi.log.info('Read Methode')
-
         const params = this.prepareOutputs(props)
         const client = this.clientConnect()
 
-        // Create ASC Certificate
-        // pulumi.log.info('appServiceCertificateOrders.get()')
         const result = await client.appServiceCertificateOrders.get(
             props.resourceGroupName,
             params.certificateOrderName,
@@ -240,8 +235,6 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
         currentOutputs: AscCertificateOrderOutputs,
         news: AscCertificateOrderOutputs,
     ): Promise<pulumi.dynamic.CheckResult> {
-        // pulumi.log.info('Check Methode')
-
         // If none of the properties changed, then there is nothing to be validated.
         if (
             currentOutputs.fqdn === news.fqdn &&
@@ -290,8 +283,6 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
         previousOutput: AscCertificateOrderOutputs,
         news: AscCertificateOrderInputs,
     ): Promise<pulumi.dynamic.DiffResult> {
-        // pulumi.log.info('Diff Methode')
-
         const replaces: string[] = []
         let changes = false
         let deleteBeforeReplace = false
@@ -306,7 +297,6 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
             deleteBeforeReplace = true
 
             if (previousOutput.fqdn !== news.fqdn) {
-                //trigger
                 replaces.push('fqdn')
             }
             if (previousOutput.suffix !== news.suffix) {
@@ -321,7 +311,8 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
             }
         }
 
-        // Make an update and not a replace
+        // With deleteBeforeReplace = false and Changes = true, you make an update and not a replace
+        // If autorenew is changed, you make an update
         if (previousOutput.autoRenew !== news.autoRenew) {
             changes = true
         }
@@ -339,8 +330,6 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
      * @returns AscCertificateOrderOutputs Interface
      */
     async create(inputs: AscCertificateOrderInputs): Promise<pulumi.dynamic.CreateResult> {
-        // pulumi.log.info('Create Methode')
-
         const params = this.prepareOutputs(inputs)
         const client = this.clientConnect()
 
@@ -368,7 +357,6 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
             },
         )
 
-        //build formated fqdn how wil be use for other properties
         const outs: AscCertificateOrderOutputs = {
             ...inputs,
             productType: params.productType,
@@ -393,13 +381,10 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
         olds: AscCertificateOrderOutputs,
         news: AscCertificateOrderInputs,
     ): Promise<pulumi.dynamic.UpdateResult> {
-        // pulumi.log.info('Update Methode')
-
-        // updated only if autorenew change
+        // Updated only if autorenew change
         const params = this.prepareOutputs(news)
         const client = this.clientConnect()
 
-        // Create ASC Certificate
         const resultAsc = await client.appServiceCertificateOrders.update(
             news.resourceGroupName,
             params.certificateOrderName,
@@ -428,144 +413,10 @@ class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
      * @param props
      */
     async delete(id: string, props: AscCertificateOrderInputs) {
-        // pulumi.log.info(`Delete Methode - id: ${id}`)
-
         const params = this.prepareOutputs(props)
         const client = this.clientConnect()
 
         // Delete ASC Certificate and link into Kv
         await client.appServiceCertificateOrders.delete(props.resourceGroupName, params.certificateOrderName)
-    }
-}
-/**
- * Create an App Service Certificate and store certificate DV into a KeyVault Secret
- *
- * @example
- * ```ts
- * const asc = new AscCertificateOrder(`pulumi-asc-foo.domain.tld`, {
- *  fqdn: 'foo.domain.tld',
- *  suffix: '20221230',
- *  autoRenew: false,
- *  resourceGroupName: rg.name,
- *  keyVaultId: kv.id,
- * })
- * ```
- * 
- * @extends pulumi.dynamic.Resource
- * @param name - unique ressource name
- * @param args - AscCertificateOrderRessourceInputs Interface
- * @param opts - (optional) pulumi.CustomResourceOptions
- *
-
- */
-export class AscCertificateOrder extends pulumi.dynamic.Resource {
-    public readonly resourceGroupName!: pulumi.Output<string>
-    public readonly keyVaultId!: pulumi.Output<string>
-    public readonly fqdn!: pulumi.Output<string>
-    public readonly autoRenew!: pulumi.Output<boolean>
-    public readonly suffix!: pulumi.Output<string>
-    public readonly certificateOrderName!: pulumi.Output<string>
-    public readonly keyVaultSecretName!: pulumi.Output<string>
-    public readonly certificateURI!: pulumi.Output<string>
-    public readonly domainVerificationToken!: pulumi.Output<string>
-
-    constructor(name: string, args: AscCertificateOrderRessourceInputs, opts?: pulumi.CustomResourceOptions) {
-        let subscriptionId: string
-        try {
-            // Check if Azure native provider is available
-            subscriptionId = new pulumi.Config('azure-native').require('subscriptionId')
-        } catch {
-            // Otherwise, check Azure Classic provider is available
-            try {
-                subscriptionId = new pulumi.Config('azure').require('subscriptionId')
-            } catch {
-                throw 'No Subscription ID found. You must specify it in your pulumi.<stack>.yaml, with property azure-native:subscriptionId OR azure:subscriptionId'
-            }
-        }
-        let tenantId: string
-        try {
-            // Check if Azure native provider is available
-            tenantId = new pulumi.Config('azure-native').require('tenantId')
-        } catch {
-            // Otherwise, check Azure Classic provider is available
-            try {
-                tenantId = new pulumi.Config('azure').require('tenantId')
-            } catch {
-                throw 'No Tenant ID found. You must specify it in your pulumi.<stack>.yaml, with property azure-native:tenantId OR azure:tenantId'
-            }
-        }
-
-        super(
-            new AscCertificateOrderProvider({ subscriptionId, tenantId }),
-            name,
-            {
-                ...args,
-                certificateOrderName: undefined,
-                keyVaultSecretName: undefined,
-                productType: undefined,
-                certificateURI: undefined,
-                domainVerificationToken: undefined,
-            },
-            opts,
-        )
-    }
-}
-
-/**
- * Component CertificateOrder
- *
- * Create an App Service Certificate ressource and the certificate store into a Keyvault
- *
- * @example
- * ```ts
- * const asc = new CertificateOrder({
- *   fqdn: '*.foo.domain.tld',
- *   autoRenew: true,
- *   suffix: '20221230',
- *   resourceGroupName: rg.name,
- *   keyVaultId: kv.id,
- * })
- * ```
- *
- * @param args CertificateOrderInputs
- * @param args.resourceGroupName Ressource Group Name where ASC will be created
- * @param args.keyVaultId KeyVault ID where Certificate will be stored
- * @param args.fqdn FQDN how will be protected
- * @param args.autoRenew if True, autoRenew Certificate is set
- * @param args.suffix (Optional) suffix will be added at the end of certificate name
- * @param opts (Optional) pulumi.CustomResourceOptions
- *
- * @returns AscCertificateOrderOutputs include domainVerificationToken
- *
- */
-export class CertificateOrder extends pulumi.ComponentResource {
-    public readonly resourceGroupName: pulumi.Output<string>
-    public readonly keyVaultId: pulumi.Output<string>
-    public readonly fqdn: pulumi.Output<string>
-    public readonly autoRenew: pulumi.Output<boolean>
-    public readonly suffix: pulumi.Output<string>
-    public readonly certificateOrderName: pulumi.Output<string>
-    public readonly keyVaultSecretName: pulumi.Output<string>
-    public readonly certificateURI: pulumi.Output<string>
-    public readonly domainVerificationToken: pulumi.Output<string>
-
-    constructor(args: AscCertificateOrderRessourceInputs, opts?: pulumi.CustomResourceOptions) {
-        const commonName = AscCertificateOrderProvider.normalizeFqdn(`${args.fqdn}`, `${args.suffix}`)
-        //<package>:<module>:<type>
-        super('stawen:azure-certificate:asc', `cert-${commonName}`, {}, opts)
-
-        const asc = new AscCertificateOrder(`asc-${commonName}`, args, {
-            parent: this,
-        })
-
-        this.autoRenew = asc.autoRenew
-        this.certificateOrderName = asc.certificateOrderName
-        this.certificateURI = asc.certificateURI
-        this.domainVerificationToken = asc.domainVerificationToken
-        this.fqdn = asc.fqdn
-        this.keyVaultId = asc.keyVaultId
-        this.keyVaultSecretName = asc.keyVaultSecretName
-        this.resourceGroupName = asc.resourceGroupName
-        this.suffix = asc.suffix
     }
 }
