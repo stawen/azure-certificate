@@ -70,7 +70,7 @@ export interface AscCertificateOrderOutputs extends AscCertificateOrderInputs, A
  *
  * This class isn't into Pulumi stack Context (important to understand)
  *
- * @param subscriptionId - Sub Id where is the Kv and wehre you storge your App Service Certificate
+ * @param subscriptionId - Sub Id where is the Kv and where you storge your App Service Certificate
  */
 class AscCertificateOrderProvider implements pulumi.dynamic.ResourceProvider {
     private linkToKvName: string = `link-to-kv`

@@ -1,5 +1,4 @@
 import * as pulumi from '@pulumi/pulumi'
-// import { CertificateOrder } from '../../src/ascCertificate'
 import * as asc from '@stawen/azure-certificate'
 
 import { kv, rg } from './kv'

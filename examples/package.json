@@ -10,18 +10,13 @@
         "test": "npm run unit"
     },
     "devDependencies": {
-        "@types/node": "^14.14.37",
-        "@typescript-eslint/eslint-plugin": "^4.21.0",
-        "@typescript-eslint/parser": "^4.21.0",
-        "eslint": "^7.23.0",
-        "eslint-config-prettier": "^8.1.0",
-        "eslint-plugin-prettier": "^3.3.1",
-        "prettier": "^2.2.1"
+        "@types/node": "^14.14.37"
     },
     "dependencies": {
         "@pulumi/azure-native": "^1.89.1",
         "@pulumi/azuread": "^5.32.0",
         "@pulumi/pulumi": "^3.50.0",
-        "@stawen/azure-certificate": "^0.1.8"
+        "@stawen/azure-certificate": "^0.1.8",
+        "@pulumi/random": "^4.2.0"
     }
 }

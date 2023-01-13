@@ -1,11 +1,11 @@
-# Azure ASC Pulumi Dynamic Provider (TS)
+# Pulumi Dynamic Provider for Azure App Service Certificate
 
-The goal of this library is to provide a simple way to provision and maintain ✨App Service Certificat✨, using Typescript/Javascript, with Pulumi.
+The goal of this library is to provide a simple way to provision and maintain ✨App Service Certificate✨, using Typescript/Javascript, with Pulumi.
 
-The reason why i create this provider is :
+The reason why I create this provider is :
 
--   with Azure Classic provider, is not possible to create an ASC (App Service Provider)
--   with Azure Native, Azure Rest API have a bug (https://github.com/pulumi/pulumi-azure-native/issues/1292)
+- with Azure Classic provider, it's not possible to create easily an ASC since the module is extremely limited in functionality
+- with Azure Native, Azure Rest API have a bug (https://github.com/pulumi/pulumi-azure-native/issues/1292)
 
 ## Requirement
 
@@ -35,20 +35,20 @@ Azure Native :
 
 ```yaml
 config:
-    azure-native:environment: public
-    azure-native:location: <location>
-    azure-native:subscriptionId: <xxxx-xxxx>
-    azure-native:tenantId: <xxxx-xxxx>
+  azure-native:environment: public
+  azure-native:location: <location>
+  azure-native:subscriptionId: <xxxx-xxxx>
+  azure-native:tenantId: <xxxx-xxxx>
 ```
 
 Azure Classic :
 
 ```yaml
 config:
-    azure:environment: public
-    azure:location: <location>
-    azure:subscriptionId: <xxxx-xxxx>
-    azure:tenantId: <xxxx-xxxx>
+  azure:environment: public
+  azure:location: <location>
+  azure:subscriptionId: <xxxx-xxxx>
+  azure:tenantId: <xxxx-xxxx>
 ```
 
 ### Execution Context
@@ -67,11 +67,11 @@ If you want to run your Pulumi in Github Action, it's work too.
 import * as azc from '@stawen/azure-certificate'
 
 export const cert = new azc.CertificateOrder({
-    fqdn: '*.foo.bar.domain.tld',
-    autoRenew: true,
-    suffix: '20230106',
-    resourceGroupName: rg.name,
-    keyVaultId: kv.id,
+  fqdn: '*.foo.bar.domain.tld',
+  autoRenew: true,
+  suffix: '20230106',
+  resourceGroupName: rg.name,
+  keyVaultId: kv.id,
 })
 ```
 
@@ -111,11 +111,11 @@ This names is based on the fqdn and the suffix properties
 import * as azc from '@stawen/azure-certificate'
 
 export const cert = new azc.AscCertificateOrder(`pulumi-certificate`, {
-    fqdn: '*.foo.bar.domain.tld',
-    autoRenew: true,
-    suffix: '20230106',
-    resourceGroupName: rg.name,
-    keyVaultId: kv.id,
+  fqdn: '*.foo.bar.domain.tld',
+  autoRenew: true,
+  suffix: '20230106',
+  resourceGroupName: rg.name,
+  keyVaultId: kv.id,
 })
 ```
 

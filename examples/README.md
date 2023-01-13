@@ -4,7 +4,7 @@
 
 In this file, you must specify
 
-Azure Native :
+If you're using Azure Native :
 
 ```yaml
 config:
@@ -14,7 +14,7 @@ config:
   azure-native:tenantId: <xxxx-xxxx>
 ```
 
-Azure Classic :
+If you're using Azure Classic :
 
 ```yaml
 config:
@@ -24,11 +24,13 @@ config:
   azure:tenantId: <xxxx-xxxx>
 ```
 
-set your azure login name
+Set your Azure login name :
 
 ```yaml
 user:name: name@domain.tld
 ```
+
+You will need to set your name, otherwise you will not be able to access the keyvault because it is configured in AccessPolicy and not RBAC
 
 ## Init Pulumi project
 
